@@ -7,6 +7,11 @@ import Card from 'react-bootstrap/Card';
 
 
 function SignUp() {
+
+  const [full_name, setFull_name] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  
   return (
     <>
       <h1 style={{textAlign: 'center', margin: '30px 0'}}>Login</h1>
@@ -18,18 +23,18 @@ function SignUp() {
                 <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Full Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your full name" />
+                    <Form.Control value={full_name} onChange={(e)=>setFull_name(e.target.value)} type="text" placeholder="Enter your full name" />
                     
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your username" />
+                    <Form.Control value={username} onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Enter your username" />
                     
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
                   
                   <Button variant="primary" type="submit">

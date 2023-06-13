@@ -4,9 +4,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import {useState} from 'react'
 
 
 function Login() {
+  const [full_name, setFull_name] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <>
       <h1 style={{textAlign: 'center', margin: '30px 0'}}>Login</h1>
@@ -18,13 +23,13 @@ function Login() {
                 <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your username" />
+                    <Form.Control value={username} onChange={(e)=>setUsername(e.target.value)}type="text" placeholder="Enter your username" />
                     
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
                   
                   <Button variant="primary" type="submit">
