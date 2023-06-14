@@ -15,6 +15,7 @@ const AddQuote = ()=>{
     const [quote, setQuote] = useState('')
     const dispatch = useDispatch()
     const user = useSelector(state=>state.user.user)
+    const quotes = useSelector(state=>state.quote.quotes)
 
     const handleAddQuote = async() => {
         if (!user) {
@@ -27,6 +28,7 @@ const AddQuote = ()=>{
     return (
         <>
             <h1 style={{textAlign: 'center', margin: '30px 0'}}>Add Quote</h1>
+            
             <Container>
                 <Row className="justify-content-center">
                 <Col lg={8} xs={10}>
