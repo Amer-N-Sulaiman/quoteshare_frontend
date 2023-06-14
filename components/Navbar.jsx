@@ -11,7 +11,7 @@ function MyNavbar() {
         <>
             <Navbar bg="dark" variant="dark" style={{marginBottom: '30px'}}>
             <Container>
-                <Navbar.Brand href="/">Quote Share</Navbar.Brand>
+                <Navbar.Brand href="/">Share Quote</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/feed">Quotes Feed</Nav.Link>
                     {!user && <Nav.Link href="/login">Login</Nav.Link>}
