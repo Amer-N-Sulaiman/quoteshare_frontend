@@ -19,7 +19,7 @@ const Feed = ()=>{
 
     if (!user){
         return (
-            <h4>Please Login To View The Quotes Feed</h4>
+            <h4 style={{textAlign: 'center'}}>Please Login Or Signup To View The Quotes Feed</h4>
         )
     }
 

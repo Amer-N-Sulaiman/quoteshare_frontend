@@ -13,7 +13,7 @@ function MyNavbar() {
             <Container>
                 <Navbar.Brand href="/">Quote Share</Navbar.Brand>
                 <Nav className="me-auto">
-                    {user && <Nav.Link href="/">Quotes Feed</Nav.Link>}
+                    <Nav.Link href="/feed">Quotes Feed</Nav.Link>
                     {!user && <Nav.Link href="/login">Login</Nav.Link>}
                     {!user && <Nav.Link href="/signup">Sign up</Nav.Link>}
                     {user && <Nav.Link onClick={()=>dispatch(logout())}>Log out</Nav.Link>}
