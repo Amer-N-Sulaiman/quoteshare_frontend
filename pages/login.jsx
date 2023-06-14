@@ -16,7 +16,6 @@ function Login() {
 
 
   const handleLogin = async ()=>{
-    console.log('username & password', username, password)
     dispatch(login({username, password}))
   }
   return (

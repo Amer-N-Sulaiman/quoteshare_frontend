@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signup } from '../redux/features/userSlice';
 
 
 function SignUp() {
@@ -13,7 +15,12 @@ function SignUp() {
   const [full_name, setFull_name] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
   
+  const handleSignup = async ()=>{
+    dispatch(signup({full_name, username, password}))
+  }
+
   return (
     <>
       <h1 style={{textAlign: 'center', margin: '30px 0'}}>Sign Up</h1>
@@ -39,7 +46,7 @@ function SignUp() {
                     <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
                   
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" onClick={handleSignup}>
                     Sign Up
                   </Button>
                 </Form>
