@@ -6,14 +6,22 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import {useState} from 'react'
+import { addQuote } from "../redux/features/quoteSlice"
+import { useDispatch, useSelector } from 'react-redux'
 
 
-const addQuote = ()=>{
+const AddQuote = ()=>{
     const [author, setAuthor] = useState('')
     const [quote, setQuote] = useState('')
+    const dispatch = useDispatch()
+    const user = useSelector(state=>state.user.user)
 
     const handleAddQuote = async() => {
-        console.log('add quote', quote)
+        if (!user) {
+            console.log('You should be logged in')
+            return
+        }
+        dispatch(addQuote({author, quote, token:user.token}))
     }
 
     return (
@@ -52,4 +60,4 @@ const addQuote = ()=>{
     )
 }
 
-export default addQuote
+export default AddQuote

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-const initialSlice = {
+const initialState = {
     quotes: [],
     loading: false,
     error: ''
@@ -23,9 +23,8 @@ export const addQuote = createAsyncThunk('quote/fetch', async(data)=>{
         },
         config
     )
-    
-    const createdQuote = await response.data
-    return createdQuote
+    const receivedData = await response.data
+    return receivedData.quote
 })
 
 const quoteSlice = createSlice({
@@ -33,6 +32,7 @@ const quoteSlice = createSlice({
     initialState,
     extraReducers: (builder)=>{
         builder.addCase(addQuote.fulfilled, (state, action)=>{
+            console.log('extra reducer 1', action.payload)
             state.quotes.push(action.payload)
             console.log('quotes', state.quotes)
         })
