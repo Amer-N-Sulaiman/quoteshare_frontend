@@ -1,18 +1,20 @@
 import Card from 'react-bootstrap/Card';
+import { useSelector } from 'react-redux';
 
-function QuoteCard() {
+function QuoteCard({quote}) {
+  const user = useSelector(state=>state.user.user)
   return (
-    <Card>
-      <Card.Header>Quote</Card.Header>
+    <Card style={{marginTop: '40px'}}>
+      <Card.Header>Uploaded by {user.full_name} ({user.username})</Card.Header>
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>
             {' '}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            posuere erat a ante.{' '}
+            {quote.body}
+            {' '}
           </p>
           <footer className="blockquote-footer">
-            Someone famous in <cite title="Source Title">Source Title</cite>
+            <cite title="Source Title">{quote.author}</cite>
           </footer>
         </blockquote>
       </Card.Body>
