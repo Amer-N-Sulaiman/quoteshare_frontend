@@ -22,12 +22,19 @@ const initialState = {
 const userSlice = createSlice({
     name: 'User',
     initialState,
+    reducers: {
+        setUser: (state, action)=>{
+            state.user = action.payload
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(login.fulfilled, (state, action)=>{
             console.log('action payload', action.payload)
             state.user = action.payload
+            localStorage.setItem('user', JSON.stringify(action.payload))
         })
     }
 })
 
+export const {setUser} = userSlice.actions
 export default userSlice.reducer
