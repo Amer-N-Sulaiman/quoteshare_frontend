@@ -16,6 +16,7 @@ function MyNavbar() {
                     <Nav.Link href="/feed">Quotes Feed</Nav.Link>
                     {!user && <Nav.Link href="/login">Login</Nav.Link>}
                     {!user && <Nav.Link href="/signup">Sign up</Nav.Link>}
+                    {user && <Nav.Link href="/addQuote">Add Quote</Nav.Link>}
                     {user && <Nav.Link onClick={()=>dispatch(logout())}>Log out</Nav.Link>}
                 </Nav>
             </Container>
