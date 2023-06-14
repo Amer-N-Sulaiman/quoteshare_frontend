@@ -1,4 +1,5 @@
 import { Container, Row, Col} from 'react-bootstrap'
+import Head from 'next/head'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchQuotes } from '../redux/features/quoteSlice'

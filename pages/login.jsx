@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button';
+import Head from 'next/head'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
