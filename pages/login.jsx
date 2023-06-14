@@ -4,20 +4,28 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {login} from '../redux/features/userSlice'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {useRouter} from 'next/router'
 
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
-
+  const user = useSelector(state=>state.user.user)
+  const router = useRouter()
 
   const handleLogin = async ()=>{
     dispatch(login({username, password}))
   }
+
+  useEffect(()=>{
+    if (user){
+      router.replace('/feed')
+    }
+  }, [user])
   return (
     <>
       <h1 style={{textAlign: 'center', margin: '30px 0'}}>Login</h1>

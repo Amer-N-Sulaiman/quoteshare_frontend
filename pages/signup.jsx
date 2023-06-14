@@ -5,9 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../redux/features/userSlice';
+import { useRouter } from 'next/router';
 
 
 function SignUp() {
@@ -16,10 +17,18 @@ function SignUp() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const user = useSelector(state=>state.user.user)
+  const router = useRouter()
   
   const handleSignup = async ()=>{
     dispatch(signup({full_name, username, password}))
   }
+
+  useEffect(()=>{
+    if (user){
+      router.replace('/feed')
+    }
+  }, [user])
 
   return (
     <>
