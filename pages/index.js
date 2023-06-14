@@ -11,7 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Home</h1>
+      <h1 style={{textAlign: 'center'}}>Home</h1>
+      
+      <h4 style={{textAlign: 'center'}}>Browse Many Inspiring Quotes</h4>
     </div>
   )
 }
