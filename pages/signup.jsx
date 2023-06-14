@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
+import { useState } from 'react';
+
 
 function SignUp() {
 
@@ -14,7 +16,7 @@ function SignUp() {
   
   return (
     <>
-      <h1 style={{textAlign: 'center', margin: '30px 0'}}>Login</h1>
+      <h1 style={{textAlign: 'center', margin: '30px 0'}}>Sign Up</h1>
       <Container>
         <Row className="justify-content-center">
           <Col lg={8} xs={10}>
