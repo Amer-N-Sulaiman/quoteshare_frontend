@@ -16,7 +16,7 @@ export const addQuote = createAsyncThunk('quote/add', async(data)=>{
         }
     }
     const response = await axios.post(
-        'http://localhost:4000/quote/add',
+        'https://quoteshare.onrender.com/quote/add',
         {
             author,
             quote
@@ -35,7 +35,7 @@ export const fetchQuotes = createAsyncThunk('quote/fetch', async(data)=>{
         }
     }
     const response = await axios.get(
-        'http://localhost:4000/quote/fetchAll',
+        'https://quoteshare.onrender.com/quote/fetchAll',
         config
     )
     const quotes = await response.data

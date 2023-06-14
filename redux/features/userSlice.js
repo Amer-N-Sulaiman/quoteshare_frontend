@@ -4,7 +4,7 @@ import axios from 'axios'
 export const login = createAsyncThunk('user/login', async (data)=>{
     const {username, password} = data
     const response = await axios.post(
-        'http://localhost:4000/auth/login',
+        'https://quoteshare.onrender.com/auth/login',
         {
             username,
             password
@@ -17,7 +17,7 @@ export const login = createAsyncThunk('user/login', async (data)=>{
 export const signup = createAsyncThunk('user/signup', async (data)=>{
     const {full_name, username, password} = data
     const response = await axios.post(
-        'http://localhost:4000/auth/signup',
+        'https://quoteshare.onrender.com/auth/signup',
         {
             full_name,
             username,
