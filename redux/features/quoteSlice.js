@@ -43,16 +43,22 @@ export const fetchQuotes = createAsyncThunk('quote/fetch', async(data)=>{
     return quotes
 })
 
-export const addLike = (createAsyncThunk('quote/addLike', async (data) => {
-    const {token, quoteId, quoteIndex, username} = data
+export const like = (createAsyncThunk('quote/addLike', async (data) => {
+    const {liked, token, quoteId, quoteIndex, username} = data
     
     const config = {
         headers: {
             'authorization': `Bearer ${token}`
         }
     }
-    
-    const response = await axios.post('https://quoteshare.onrender.com/quote/addLike', {quoteId}, config)
+
+    if (!liked){
+        await axios.post('https://quoteshare.onrender.com/quote/addLike', {quoteId}, config)
+    } else {
+
+        await axios.post('https://quoteshare.onrender.com/quote/removeLike', {quoteId}, config)
+    }
+
     return {quoteId, username, quoteIndex}
 }))
 
@@ -68,9 +74,15 @@ const quoteSlice = createSlice({
 
         builder.addCase(fetchQuotes.fulfilled, (state, action)=>{
             state.quotes = action.payload.quotes
+            state.loading = false
         })
 
-        builder.addCase(addLike.fulfilled, (state, action)=>{
+        builder.addCase(fetchQuotes.pending, (state, action)=>{
+            state.loading=true
+            state.error = ''
+        })
+
+        builder.addCase(like.fulfilled, (state, action)=>{
             const {quoteIndex, username} = action.payload
             // const usernameIndex = state.quotes[quoteIndex].likes.indexOf(username)
             state.quotes[quoteIndex].likes.push(username)

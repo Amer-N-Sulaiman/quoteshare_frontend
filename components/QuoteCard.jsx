@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useState, useEffect} from 'react'
 import Button from '@mui/material/Button';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import { addLike } from '../redux/features/quoteSlice';
+import { like } from '../redux/features/quoteSlice';
 
 function QuoteCard({quote, quoteIndex}) {
   const user = useSelector(state=>state.user.user)
@@ -19,15 +19,8 @@ function QuoteCard({quote, quoteIndex}) {
   }, [user])
 
   const handleLike = async()=>{
-    if (liked) {
-      setLiked(false)
-      // asyncthunk function to remove like
-    }
-    else {
-      setLiked(true)
-      dispatch(addLike({token: user.token, quoteId: quote._id, username: user.username, quoteIndex}))
-      // async function to add like
-    }
+    setLiked(!liked)
+    dispatch(like({liked, token: user.token, quoteId: quote._id, username: user.username, quoteIndex}))
   }
 
   return (

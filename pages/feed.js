@@ -4,11 +4,13 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchQuotes } from '../redux/features/quoteSlice'
 import QuoteCard from '../components/QuoteCard'
+import Skeleton from '@mui/material/Skeleton'
 
 const Feed = ()=>{
     const quotes = useSelector(state=>state.quote.quotes)
     const dispatch = useDispatch()
     const user = useSelector(state=>state.user.user)
+    const loadingQuotes = useSelector(state=>state.quote.loading)
 
     useEffect(()=>{
         if (!user){
@@ -23,7 +25,26 @@ const Feed = ()=>{
             <h4 style={{textAlign: 'center'}}>Please Login Or Signup To View The Quotes Feed</h4>
         )
     }
-
+    if (loadingQuotes){
+        return(
+            <Container>
+                <Row>
+                    <Col xs={10} lg={8} style={{margin: '40px auto'}}>
+                        <Skeleton animation="wave" />
+                    </Col>
+                    <Col xs={10} lg={8} style={{margin: '40px auto'}}>
+                        <Skeleton animation="wave" />
+                    </Col>
+                    <Col xs={10} lg={8} style={{margin: '40px auto'}}>
+                        <Skeleton animation="wave" />
+                    </Col>
+                    <Col xs={10} lg={8} style={{margin: '40px auto'}}>
+                        <Skeleton animation="wave" />
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
     return (
         <>
             <Head>
