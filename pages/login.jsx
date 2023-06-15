@@ -17,6 +17,7 @@ function Login() {
   const dispatch = useDispatch()
   const user = useSelector(state=>state.user.user)
   const router = useRouter()
+  const error = useSelector(state=>state.user.error)
 
   const handleLogin = async ()=>{
     dispatch(login({username, password}))
@@ -27,6 +28,8 @@ function Login() {
       router.replace('/feed')
     }
   }, [user])
+
+
   return (
     <>
       <Head>
@@ -51,6 +54,8 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
+
+                  {error && <p>{error}</p>}
                   
                   <Button variant="primary" onClick={handleLogin}>
                     Login
