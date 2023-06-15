@@ -1,17 +1,20 @@
 import Card from 'react-bootstrap/Card';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {useState, useEffect} from 'react'
 import Button from '@mui/material/Button';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import { addLike } from '../redux/features/quoteSlice';
 
-function QuoteCard({quote}) {
+function QuoteCard({quote, quoteIndex}) {
   const user = useSelector(state=>state.user.user)
   const [liked, setLiked] = useState(false)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     if (!user){
       return
     }
+    console.log(user.username)
     setLiked(quote.likes.includes(user.username))
   }, [user])
 
@@ -22,6 +25,7 @@ function QuoteCard({quote}) {
     }
     else {
       setLiked(true)
+      dispatch(addLike({token: user.token, quoteId: quote._id, username: user.username, quoteIndex}))
       // async function to add like
     }
   }

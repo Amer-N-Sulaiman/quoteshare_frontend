@@ -34,9 +34,9 @@ const Feed = ()=>{
             </Head>
             <Container>
                 <h1 style={{textAlign: 'center'}}>Quotes Feed</h1>
-                {quotes.map(quote=>(<Row key={quote._id}>
+                {quotes.map((quote, quoteIndex)=>(<Row key={quote._id}>
                     <Col>
-                        <QuoteCard quote={quote} />
+                        <QuoteCard quote={quote} quoteIndex={quoteIndex} />
                     </Col>
                 </Row>))}
             </Container>
