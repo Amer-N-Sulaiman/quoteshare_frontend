@@ -5,7 +5,8 @@ import axios from 'axios'
 const initialState = {
     quotes: [],
     loading: false,
-    error: ''
+    error: '',
+    noMore: false
 }
 
 export const addQuote = createAsyncThunk('quote/add', async(data)=>{
@@ -28,14 +29,18 @@ export const addQuote = createAsyncThunk('quote/add', async(data)=>{
 })
 
 export const fetchQuotes = createAsyncThunk('quote/fetch', async(data)=>{
-    const {token} = data
+    const {token, limit, skip} = data
     const config = {
         headers: {
             'authorization': `Bearer ${token}`
         }
     }
-    const response = await axios.get(
+    const response = await axios.post(
         'https://quoteshare.onrender.com/quote/fetchAll',
+        {
+            limit,
+            skip
+        },
         config
     )
     const quotes = await response.data
@@ -68,12 +73,16 @@ const quoteSlice = createSlice({
     extraReducers: (builder)=>{
         builder.addCase(addQuote.fulfilled, (state, action)=>{
             console.log('extra reducer 1', action.payload)
+            
             state.quotes.push(action.payload)
             console.log('quotes', state.quotes)
         })
 
         builder.addCase(fetchQuotes.fulfilled, (state, action)=>{
-            state.quotes = action.payload.quotes
+            if (action.payload.quotes.length<3){
+                state.noMore=true
+            }
+            state.quotes.push(...action.payload.quotes)
             state.loading = false
         })
 
