@@ -20,6 +20,7 @@ function SignUp() {
   const dispatch = useDispatch()
   const user = useSelector(state=>state.user.user)
   const router = useRouter()
+  const error = useSelector(state=>state.user.error)
   
   const handleSignup = async ()=>{
     dispatch(signup({full_name, username, password}))
@@ -61,6 +62,7 @@ function SignUp() {
                     <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
                   
+                  {error && <p>{error}</p>}
                   <Button variant="primary" onClick={handleSignup}>
                     Sign Up
                   </Button>

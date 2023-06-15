@@ -27,7 +27,9 @@ export const signup = createAsyncThunk('user/signup', async (data)=>{
             username,
             password
         }
-    )
+    ).catch((error)=>{
+        throw Error(error.response.data.error)
+    })
     const user = await response.data
     return user
     
@@ -60,14 +62,16 @@ const userSlice = createSlice({
         })
 
         builder.addCase(login.rejected, (state, action)=>{
-            console.log('rejected', action)
             state.error = action.error.message
         })
 
         builder.addCase(signup.fulfilled, (state, action)=>{
-            console.log('action payload', action.payload)
             state.user = action.payload
             localStorage.setItem('user', JSON.stringify(action.payload))
+        })
+
+        builder.addCase(signup.rejected, (state, action)=>{
+            state.error = action.error.message
         })
     }
 })
