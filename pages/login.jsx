@@ -9,6 +9,8 @@ import {useState, useEffect} from 'react'
 import {login} from '../redux/features/userSlice'
 import { useDispatch, useSelector } from 'react-redux';
 import {useRouter} from 'next/router'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
 function Login() {
@@ -55,11 +57,14 @@ function Login() {
                     <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
 
-                  {error && <p>{error}</p>}
-                  
                   <Button variant="primary" onClick={handleLogin}>
                     Login
                   </Button>
+                  {error && <Alert severity="error" style={{marginTop: '30px'}}>
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{error}</strong>
+                  </Alert>}
+
                 </Form>
     
               </Card.Body>

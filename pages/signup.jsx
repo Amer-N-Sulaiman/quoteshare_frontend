@@ -10,6 +10,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../redux/features/userSlice';
 import { useRouter } from 'next/router';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
 
 
 function SignUp() {
@@ -62,10 +65,13 @@ function SignUp() {
                     <Form.Control value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
                   </Form.Group>
                   
-                  {error && <p>{error}</p>}
                   <Button variant="primary" onClick={handleSignup}>
                     Sign Up
                   </Button>
+                  {error && <Alert severity="error" style={{marginTop: '30px'}}>
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{error}</strong>
+                  </Alert>}
                 </Form>
     
               </Card.Body>
