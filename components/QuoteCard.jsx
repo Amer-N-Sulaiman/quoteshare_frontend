@@ -25,7 +25,7 @@ function QuoteCard({quote, quoteIndex}) {
 
   return (
     <Card style={{marginTop: '40px'}}>
-      <Card.Header>Uploaded by {user.full_name} ({user.username})</Card.Header>
+      <Card.Header>Uploaded by {quote.full_name} ({quote.username})</Card.Header>
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>
