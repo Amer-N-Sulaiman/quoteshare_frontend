@@ -9,6 +9,7 @@ function QuoteCard({quote, quoteIndex}) {
   const user = useSelector(state=>state.user.user)
   const [liked, setLiked] = useState(false)
   const dispatch = useDispatch()
+  const [likesNum, setLikesNum] = useState(quote.likes.length)
 
   useEffect(()=>{
     if (!user){
@@ -19,6 +20,11 @@ function QuoteCard({quote, quoteIndex}) {
   }, [user])
 
   const handleLike = async()=>{
+    if (!liked){
+      setLikesNum(likesNum+1)
+    } else {
+      setLikesNum(likesNum-1)
+    }
     setLiked(!liked)
     dispatch(like({liked, token: user.token, quoteId: quote._id, username: user.username, quoteIndex}))
   }
@@ -37,8 +43,9 @@ function QuoteCard({quote, quoteIndex}) {
             <cite title="Source Title">{quote.author}</cite>
           </footer>
           <Card.Footer>
-            {!liked && <Button onClick={handleLike} variant="outlined" startIcon={<ThumbUpAltIcon />}>Like</Button>}
-            {liked && <Button onClick={handleLike} variant="contained" startIcon={<ThumbUpAltIcon />}>Unlike</Button>}
+            {!liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="outlined" startIcon={<ThumbUpAltIcon />}>Like</Button>}
+            {liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="contained" startIcon={<ThumbUpAltIcon />}>Unlike</Button>}
+            <Card.Text style={{float: 'left', marginLeft: '30px', marginTop: '10px'}}>Liked by {likesNum}</Card.Text>
           </Card.Footer>
         </blockquote>
       </Card.Body>
