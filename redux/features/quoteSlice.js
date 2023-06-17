@@ -70,6 +70,15 @@ export const like = (createAsyncThunk('quote/addLike', async (data) => {
 const quoteSlice = createSlice({
     name: "Quote",
     initialState,
+    reducers: {
+        resetQuotes: (state, action) => {
+            state.quotes = []
+            state.error = ''
+            state.noMore = false
+            state.loading = false
+        }
+    },
+
     extraReducers: (builder)=>{
         builder.addCase(addQuote.fulfilled, (state, action)=>{
             console.log('extra reducer 1', action.payload)
@@ -100,3 +109,4 @@ const quoteSlice = createSlice({
 })
 
 export default quoteSlice.reducer
+export const {resetQuotes} = quoteSlice.actions

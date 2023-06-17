@@ -9,6 +9,7 @@ import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar';
 import { IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close';
+import { resetQuotes } from '../redux/features/quoteSlice'
 
 
 const Feed = ()=>{
@@ -26,6 +27,7 @@ const Feed = ()=>{
             console.log('no user')
             return
         }
+        dispatch(resetQuotes())
         dispatch(fetchQuotes({token: user.token, limit, skip}))
         setSkip(skip+3) 
     }, [user])
