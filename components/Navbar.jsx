@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {logout} from '../redux/features/userSlice'
 import {useDispatch, useSelector} from 'react-redux'
+import Link from 'next/link'
 
 function MyNavbar() {
     const dispatch = useDispatch()
@@ -13,10 +14,10 @@ function MyNavbar() {
             <Container>
                 <Navbar.Brand href="/">Share Quote</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="/feed">Quotes Feed</Nav.Link>
-                    {!user && <Nav.Link href="/login">Login</Nav.Link>}
-                    {!user && <Nav.Link href="/signup">Sign up</Nav.Link>}
-                    {user && <Nav.Link href="/addQuote">Add Quote</Nav.Link>}
+                    <Nav.Link as={Link} href="/feed">Quotes Feed</Nav.Link>
+                    {!user && <Nav.Link as={Link} href="/login">Login</Nav.Link>}
+                    {!user && <Nav.Link as={Link} href="/signup">Sign up</Nav.Link>}
+                    {user && <Nav.Link as={Link} href="/addQuote">Add Quote</Nav.Link>}
                     {user && <Nav.Link onClick={()=>dispatch(logout())}>Log out</Nav.Link>}
                 </Nav>
             </Container>
