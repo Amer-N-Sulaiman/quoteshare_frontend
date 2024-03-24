@@ -11,6 +11,8 @@ function QuoteCard({quote, quoteIndex}) {
   const dispatch = useDispatch()
   const [likesNum, setLikesNum] = useState(quote.likes.length)
 
+  const [pleaseLoginPopup, setPleaseLoginPopup] = useState(false)
+
   useEffect(()=>{
     if (!user){
       return
@@ -30,26 +32,33 @@ function QuoteCard({quote, quoteIndex}) {
   }
 
   return (
-    <Card style={{marginTop: '40px'}}>
-      <Card.Header>Uploaded by {quote.full_name} ({quote.username})</Card.Header>
-      <Card.Body>
-        <blockquote className="blockquote mb-0">
-          <p>
-            {' '}
-            {quote.body}
-            {' '}
-          </p>
-          <footer className="blockquote-footer">
-            <cite title="Source Title">{quote.author}</cite>
-          </footer>
-          <Card.Footer>
-            {!liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="outlined" startIcon={<ThumbUpAltIcon />}>Like</Button>}
-            {liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="contained" startIcon={<ThumbUpAltIcon />}>Unlike</Button>}
-            <Card.Text style={{float: 'left', marginLeft: '30px', marginTop: '10px'}}>Liked by {likesNum}</Card.Text>
-          </Card.Footer>
-        </blockquote>
-      </Card.Body>
-    </Card>
+    <>
+      {pleaseLoginPopup && <Alert variant="danger" onClose={() => setPleaseLoginPopup(false)} dismissible>
+        <Alert.Heading>Please Login or Sign up to like</Alert.Heading>
+      </Alert>}
+      <Card style={{marginTop: '40px'}}>
+        <Card.Header>Uploaded by {quote.full_name} ({quote.username})</Card.Header>
+        <Card.Body>
+          <blockquote className="blockquote mb-0">
+            <p>
+              {' '}
+              {quote.body}
+              {' '}
+            </p>
+            <footer className="blockquote-footer">
+              <cite title="Source Title">{quote.author}</cite>
+            </footer>
+            <Card.Footer>
+              {user && !liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="outlined" startIcon={<ThumbUpAltIcon />}>Like</Button>}
+              {user && liked && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={handleLike} variant="contained" startIcon={<ThumbUpAltIcon />}>Unlike</Button>}
+              {!user && <Button style={{float: 'left', marginLeft: '30px', marginTop: '10px'}} onClick={()=>setPleaseLoginPopup(true)} variant="outlined" startIcon={<ThumbUpAltIcon />}>Like</Button>}
+              <Card.Text style={{float: 'left', marginLeft: '30px', marginTop: '10px'}}>Liked by {likesNum}</Card.Text>
+            </Card.Footer>
+          </blockquote>
+        </Card.Body>
+      </Card>
+    </>
+    
   );
 }
 

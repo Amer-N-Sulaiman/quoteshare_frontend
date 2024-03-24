@@ -29,19 +29,20 @@ export const addQuote = createAsyncThunk('quote/add', async(data)=>{
 })
 
 export const fetchQuotes = createAsyncThunk('quote/fetch', async(data)=>{
-    const {token, limit, skip} = data
-    const config = {
-        headers: {
-            'authorization': `Bearer ${token}`
-        }
-    }
+    // const {token, limit, skip} = data
+    const {limit, skip} = data
+    // const config = {
+    //     headers: {
+    //         'authorization': `Bearer ${token}`
+    //     }
+    // }
     const response = await axios.post(
         'https://quoteshare.onrender.com/quote/fetchAll',
         {
             limit,
             skip
         },
-        config
+        // config
     )
     const quotes = await response.data
     console.log(quotes)

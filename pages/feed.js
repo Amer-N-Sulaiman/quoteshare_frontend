@@ -28,7 +28,8 @@ const Feed = ()=>{
             return
         }
         dispatch(resetQuotes())
-        dispatch(fetchQuotes({token: user.token, limit, skip}))
+        // dispatch(fetchQuotes({token: user.token, limit, skip}))
+        dispatch(fetchQuotes({limit, skip}))
         setSkip(skip+3) 
     }, [user])
 
@@ -60,11 +61,11 @@ const Feed = ()=>{
           </IconButton>
         </React.Fragment>
       );
-    if (!user){
-        return (
-            <h4 style={{textAlign: 'center'}}>Please Login Or Signup To View The Quotes Feed</h4>
-        )
-    }
+    // if (!user){
+    //     return (
+    //         <h4 style={{textAlign: 'center'}}>Please Login Or Signup To View The Quotes Feed</h4>
+    //     )
+    // }
     
     return (
         <>
