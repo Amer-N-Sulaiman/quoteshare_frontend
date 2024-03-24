@@ -23,10 +23,10 @@ const Feed = ()=>{
     const [openSnackbar, setOpensnackbar] = useState(false)
 
     useEffect(()=>{
-        if (!user){
-            console.log('no user')
-            return
-        }
+        // if (!user){
+        //     console.log('no user')
+        //     return
+        // }
         dispatch(resetQuotes())
         // dispatch(fetchQuotes({token: user.token, limit, skip}))
         dispatch(fetchQuotes({limit, skip}))
@@ -38,7 +38,8 @@ const Feed = ()=>{
             setOpensnackbar(true)
             return
         }
-        dispatch(fetchQuotes({token: user.token, limit, skip}))
+        // dispatch(fetchQuotes({token: user.token, limit, skip}))
+        dispatch(fetchQuotes({limit, skip}))
         setSkip(skip+3) 
     }
 

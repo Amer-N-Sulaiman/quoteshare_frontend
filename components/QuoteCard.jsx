@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import Button from '@mui/material/Button';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { like } from '../redux/features/quoteSlice';
+import Alert from 'react-bootstrap/Alert';
 
 function QuoteCard({quote, quoteIndex}) {
   const user = useSelector(state=>state.user.user)
@@ -33,9 +34,6 @@ function QuoteCard({quote, quoteIndex}) {
 
   return (
     <>
-      {pleaseLoginPopup && <Alert variant="danger" onClose={() => setPleaseLoginPopup(false)} dismissible>
-        <Alert.Heading>Please Login or Sign up to like</Alert.Heading>
-      </Alert>}
       <Card style={{marginTop: '40px'}}>
         <Card.Header>Uploaded by {quote.full_name} ({quote.username})</Card.Header>
         <Card.Body>
@@ -57,6 +55,9 @@ function QuoteCard({quote, quoteIndex}) {
           </blockquote>
         </Card.Body>
       </Card>
+      {pleaseLoginPopup && <Alert variant="danger" onClose={() => setPleaseLoginPopup(false)} dismissible>
+        <Alert.Heading>Please Login or Sign up to like</Alert.Heading>
+      </Alert>}
     </>
     
   );
